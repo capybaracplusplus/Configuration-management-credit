@@ -1,0 +1,79 @@
+# Этап 4. Запускать с .generated/vfs/deep.zip.
+# Первый cd - показывает ошибку отсутствующего предыдущего каталога.
+cd -
+
+# Список: обычный, скрытые имена, подробный, объединённые флаги, файл.
+ls
+ls -a
+ls -l
+ls -al /
+ls /empty
+ls /docs /assets
+ls -l /assets/payload.bin
+ls -- "/docs/read me.txt" /docs/привет.txt
+
+# Навигация: абсолютный путь, относительный, точка, родитель, предыдущий.
+cd /tree/level1
+cd level2/level3
+ls -l note.txt
+cd .
+cd ..
+cd -
+cd /../../..
+cd -- /docs
+cd
+ls -a
+cd -
+cd /
+
+# echo: пустой вывод, аргументы, переменные, кавычки, конец параметров.
+echo
+echo hello world
+echo "$HOME" '${HOME}' "имя с пробелами" ""
+echo escaped\ argument "# это текст" # это комментарий
+echo -n "Без завершающего перевода строки."
+echo "Следующая команда."
+echo -- -n "Флаг как текст"
+
+# uniq объединяет только соседние одинаковые строки.
+uniq /docs/repeated.txt
+uniq -c /docs/repeated.txt
+uniq -d /docs/repeated.txt
+uniq -u /docs/repeated.txt
+uniq -c -d /docs/repeated.txt
+uniq -cu /docs/repeated.txt
+uniq -- /docs/unique.txt
+uniq "/docs/read me.txt"
+
+# cal: текущий месяц, год, выбранный месяц, границы диапазона.
+cal
+cal 2024
+cal 2 2024
+cal 1 1
+cal 12 9999
+
+# Ошибки не прерывают сценарий. ls выдаёт результат для доступного пути.
+ls /missing /docs/unique.txt
+ls -z
+cd /missing
+cd /docs/unique.txt
+cd first second
+uniq
+uniq /missing
+uniq /docs
+uniq /assets/payload.bin
+uniq -d -u /docs/repeated.txt
+uniq -z /docs/repeated.txt
+uniq /docs/unique.txt /docs/repeated.txt
+cal 0
+cal 10000
+cal 13 2024
+cal 2 bad-year
+cal 1 2 3
+unknown
+echo "незакрытая строка
+echo ${HOME
+exit unexpected
+
+echo "Проверки этапа 4 завершены; ошибки выше были ожидаемы."
+# Просмотрите диалог и введите exit вручную.
