@@ -1,0 +1,4 @@
+# После exit команда с маркером NEVER_EXECUTED не должна появиться в диалоге.
+ls before-exit
+exit
+ls NEVER_EXECUTED

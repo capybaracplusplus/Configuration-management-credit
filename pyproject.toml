@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shell-emulator-v12"
+version = "0.1.0"
+description = "Учебный эмулятор оболочки, вариант 12"
+requires-python = ">=3.12"
+dependencies = [
+    "anyio>=4", "fastapi>=0.135", "uvicorn>=0.34", "websockets>=15",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.28", "ruff>=0.11"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["shell_emulator*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 80
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "C90", "N", "PLR0913", "PLR2004"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pylint]
+max-args = 7
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["PLR2004"]

@@ -1,0 +1,146 @@
+@import url('./terminal.css');
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #e9ece5;
+  background: #141818;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+  --mint: #b2e7c7;
+  --subtle: #89948f;
+  --mono: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 4px;
+}
+::selection { background: #426a55; color: #fff; }
+
+main {
+  width: min(1180px, calc(100% - 88px));
+  margin: 0 auto;
+}
+
+.page-header {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #2a302d;
+}
+
+h1 {
+  margin: 0;
+  color: #f2f2eb;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.project-label {
+  font: 12px var(--mono);
+  color: #919e96;
+  white-space: nowrap;
+}
+
+.session-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+}
+.command-help {
+  margin: 0;
+  color: var(--subtle);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.session-badge {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+  border: 1px solid #344238;
+  border-radius: 24px;
+  padding: 9px 13px;
+  color: #a8b6ab;
+  font-size: 11px;
+}
+.status-light {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #78847c;
+}
+.status-light.active {
+  background: var(--mint);
+  box-shadow: 0 0 0 3px #b2e7c710;
+}
+
+.configuration {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  padding: 25px 3px 28px;
+}
+.configuration > div { min-width: 0; }
+.config-label {
+  display: block;
+  color: #7d8b82;
+  font: 11px var(--mono);
+  margin-bottom: 10px;
+}
+.config-value {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 11px var(--mono);
+  color: #b5bfb6;
+}
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0 28px;
+  border-top: 1px solid #2a302d;
+  color: #758178;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 1600px) {
+  main { padding-top: 28px; }
+}
+
+@media (max-width: 720px) {
+  main { width: calc(100% - 32px); }
+  .page-header { gap: 16px; }
+  h1 { font-size: 18px; }
+  .project-label { font-size: 10px; }
+  .session-summary { padding: 20px 0; }
+  .command-help { font-size: 12px; }
+  .session-badge { display: none; }
+  .configuration { grid-template-columns: 1fr; gap: 20px; }
+  .page-footer { gap: 15px; flex-wrap: wrap; }
+}
