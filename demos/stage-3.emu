@@ -1,0 +1,37 @@
+# Этап 3: VFS загружена; ls и cd ещё остаются заглушками.
+# Сводка VFS показывает файлы, каталоги и имена в корне.
+
+# Все поддерживаемые формы заглушки ls.
+ls
+ls -a
+ls -l
+ls -al /
+ls /docs /tree/level1/level2/level3/note.txt
+ls /assets/payload.bin "/docs/read me.txt" /docs/привет.txt
+ls -- -leading-name
+
+# Все формы аргументов cd; реальная навигация появится на этапе 4.
+cd
+cd /
+cd docs
+cd .
+cd ..
+cd -
+cd /tree/level1/level2/level3
+
+# Подстановки, пробелы, пустые аргументы и комментарии.
+ls $HOME "$HOME" '${HOME}'
+ls "имя с пробелами" "" escaped\ argument
+ls "# это имя" # комментарий после команды
+
+# Ошибки должны сообщить путь сценария и номер строки.
+unknown
+ls -z
+cd first second
+exit unexpected
+ls "незакрытая строка
+ls ${HOME
+
+# После ошибок сеанс продолжает работать.
+ls after-error
+# После просмотра введите exit. Автоматический exit — в demos/exit.emu.

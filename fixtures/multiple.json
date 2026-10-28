@@ -1,0 +1,35 @@
+{
+  "description": "Несколько файлов, UTF-8, пробелы, двоичные данные и виртуальный HOME.",
+  "entries": [
+    {"path": "docs/", "mode": "0755"},
+    {"path": "assets/", "mode": "0755"},
+    {"path": "empty/", "mode": "0755"},
+    {"path": "${HOME}/", "mode": "0755"},
+    {
+      "path": "docs/repeated.txt",
+      "text": "alpha\nalpha\nbeta\nbeta\ngamma\nalpha\n",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/unique.txt",
+      "text": "one\ntwo\nthree\n",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/read me.txt",
+      "text": "Файл с пробелами в имени.\n",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/привет.txt",
+      "text": "Привет из виртуальной файловой системы!\n",
+      "mode": "0644"
+    },
+    {"path": ".hidden", "text": "hidden\n", "mode": "0600"},
+    {
+      "path": "assets/payload.bin",
+      "base64": "AP+AAQIDCg==",
+      "mode": "0644"
+    }
+  ]
+}
