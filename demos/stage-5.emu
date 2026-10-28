@@ -1,0 +1,105 @@
+# Этап 5. Использовать исходную .generated/vfs/deep.zip.
+echo "Копирование файлов и сохранение прав назначения"
+ls -l /docs/unique.txt /assets/payload.bin
+cp /docs/unique.txt /copy.txt
+chmod 0600 /copy.txt
+cp /docs/repeated.txt /copy.txt
+ls -l /copy.txt
+uniq -c /copy.txt
+cp /assets/payload.bin /binary-copy.bin
+ls -l /assets/payload.bin /binary-copy.bin
+cp /docs/unique.txt /empty
+cp -- "/docs/read me.txt" "/copy with spaces.txt"
+cp -- /docs/unique.txt /-copy.txt
+chmod -- 0640 /-copy.txt
+cd /docs
+cp unique.txt ../relative-copy.txt
+cd /
+
+echo "Рекурсивное копирование и объединение каталогов"
+cp -r /tree /tree-copy
+cp -R /tree /empty
+cp -rR /tree /combined-tree
+cp /docs/unique.txt /empty/tree/keep.txt
+cp -r /tree /empty
+ls -l /tree-copy/level1/level2/level3/note.txt
+ls /empty/tree
+
+echo "Восьмеричные и символьные права, несколько путей"
+chmod u=rw,g=r,o= /copy.txt
+chmod a+r /copy.txt
+chmod g+w,o-r /copy.txt
+chmod u-w /copy.txt
+chmod u+ /copy.txt
+chmod u- /copy.txt
+chmod g= /copy.txt
+ls -l /copy.txt
+chmod 0644 /copy.txt
+chmod 600 /copy.txt /relative-copy.txt
+cp /copy.txt /mode-copy.txt
+ls -l /copy.txt /relative-copy.txt
+ls -l /mode-copy.txt
+
+echo "Ожидаемые отказы чтения и перезаписи; восстановление 000"
+chmod 000 /copy.txt
+uniq /copy.txt
+cp /copy.txt /denied-copy.txt
+cp /docs/unique.txt /copy.txt
+chmod 644 /copy.txt
+uniq /copy.txt
+
+echo "Права каталога: создание, проход и восстановление"
+chmod 0555 /empty
+cp /docs/unique.txt /empty/new.txt
+chmod 0755 /empty
+cp /docs/unique.txt /empty/new.txt
+chmod 0644 /empty
+ls /empty
+chmod 600 /empty/new.txt
+chmod 0755 /empty
+ls -l /empty/new.txt
+
+echo "Рекурсивное изменение прав"
+chmod -R a-w /tree-copy
+ls -l /tree-copy/level1/level2/level3/note.txt
+chmod -R u+w /tree-copy
+chmod -R u-x /tree-copy
+ls /tree-copy
+# Восстанавливаем проход сверху вниз: права родителей проверяются.
+chmod 0755 /tree-copy
+chmod 0755 /tree-copy/level1
+chmod 0755 /tree-copy/level1/empty /tree-copy/level1/level2
+chmod 0755 /tree-copy/level1/level2/level3
+chmod -R u+rwx /tree-copy
+ls -l /tree-copy/level1/level2/level3/note.txt
+chmod -R 0755 /tree-copy
+ls -l /tree-copy/level1/level2/level3/note.txt
+
+echo "Ошибки копирования и аргументов"
+cp
+cp /docs/unique.txt
+cp /docs/unique.txt /copy.txt /extra.txt
+cp -z /docs/unique.txt /bad.txt
+cp /missing /bad.txt
+cp /docs/unique.txt /missing/bad.txt
+cp /tree /not-recursive
+cp -r /tree /copy.txt
+cp /copy.txt /copy.txt
+cp -r /tree /tree/inside
+chmod
+chmod 644
+chmod 888 /copy.txt
+chmod +r /copy.txt
+chmod u+s /copy.txt
+chmod -Q 644 /copy.txt
+chmod 644 /missing
+# Один неверный путь не мешает следующему правильному операнду.
+chmod 0640 /missing /copy.txt
+ls -l /copy.txt
+
+echo "Изменяем также файл исходной VFS только в памяти"
+chmod 0600 /docs/unique.txt
+cp /docs/repeated.txt /docs/unique.txt
+ls -l /docs/unique.txt
+uniq -c /docs/unique.txt
+echo "Этап 5 завершён. Обновите страницу, проверьте копии и введите exit."
